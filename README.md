@@ -9,10 +9,13 @@
 
 
 ## Router and routes
+
 1. Instead of having a lot of get functions in the server, what we can do is make routes. We make a folder called routes. Let us say we add something called users.js. We first need to require express. We then make a `const router = express.Router()`. This router makes a mini version of the app in users.js. We do not need to write `/users/add` or `/users/`. We can handle that in server.js.
 2. We then export the router from users.js. We import this in server.js using require. We then actually use the router - `app.use('/users', userRouter);`. Adding routes makes the server.js file much more managable. 
 
 
 ## Advanced Routing
 
-1. 
+1. To get dynamic values from the url, we use `:`. An example would be `router.get('/:id,...)`. I can use this using something like `${req.params.id}`. Now because I added this as a dynamic url, I cannot add any gets with / below this because node reads it top to bottom. 
+2. Now you will most likely have a chain of put, delete, get, post for every dynamic url. Instead of having all seperately, you can simply use `router.route("/:id").get({}).put({}).delete({})` with your stuff inside each.
+3. We can use `router.param("id")` which will run everytime we use a param called id. Use next() to not get stuck in infinite loop.
